@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: column; align-items: center; align-self: center; justify-content: flex-start; margin-top: 16px; margin-right: 16px; margin-bottom: 16px; margin-left: 16px; padding-top: 17px; padding-right: 17px; padding-bottom: 17px; padding-left: 17px; flex-wrap: wrap;">
+        <ui:VisualElement style="flex-grow: 1; flex-wrap: wrap;">
+            <ui:Label tabindex="-1" text="hi" parse-escape-sequences="true" display-tooltip-when-elided="true" name="dialog" style="color: rgb(255, 255, 255); -unity-text-outline-width: 0; font-size: 78px; -unity-text-align: upper-center; -unity-font-style: bold; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; text-shadow: 5.2px 3.6px 2.4px rgba(0, 0, 0, 0); flex-wrap: wrap; white-space: normal;" />
+        </ui:VisualElement>
+        <ui:Button text="Next" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btn_next" view-data-key="btn_next" tooltip="btn_next" style="height: 136px; width: 380px; font-size: 50px;" />
+    </ui:VisualElement>
+</ui:UXML>
