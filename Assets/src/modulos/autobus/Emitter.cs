@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Emitter : MonoBehaviour
 {
-    [SerializeField] private string eventID;  // Identificador del evento
-    [SerializeField] private object[] arguments; // Arreglo genérico de argumentos
+    [SerializeField] public string eventID;  // Identificador del evento
+    [SerializeField] public object[] arguments; // Arreglo genérico de argumentos
 
     private void Start()
     {

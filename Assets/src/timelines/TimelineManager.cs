@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -6,6 +7,7 @@ using UnityEngine.Timeline;
 public class TimelineManager : MonoBehaviour
 {
     [SerializeField] private PlayableDirector playableDirector; // Referencia al Playable Director
+    //[SerializeField] private SceneController sceneController; // Referencia al Playable Director
     [SerializeField] private List<TimelineAsset> timelines;     // Lista de timelines para gestionar
 
     private Dictionary<string, TimelineAsset> timelineDictionary; // Diccionario para fácil acceso por nombre
@@ -27,6 +29,18 @@ public class TimelineManager : MonoBehaviour
         if (timelines.Count > 0)
         {
             currentTimelineIndex = 0; // Inicializar al primer timeline
+            //sceneController.SetPage(currentTimelineIndex);
+        }
+    }
+
+    // Método para sincronizar al final de la animación actual
+    private void SyncToEnd()
+    {
+        if (playableDirector.playableAsset != null)
+        {
+            // Avanzar al tiempo de duración total del timeline
+            playableDirector.time = playableDirector.duration;
+            playableDirector.Evaluate(); // Evaluar el estado final
         }
     }
 
@@ -35,7 +49,9 @@ public class TimelineManager : MonoBehaviour
     {
         if (timelineDictionary.ContainsKey(timelineName))
         {
+            SyncToEnd(); // Sincronizar al final de la animación actual
             playableDirector.playableAsset = timelineDictionary[timelineName];
+            playableDirector.time = 0; // Iniciar desde el principio
             playableDirector.Play();
         }
         else
@@ -49,7 +65,9 @@ public class TimelineManager : MonoBehaviour
     {
         if (timeline != null && timelines.Contains(timeline))
         {
+            SyncToEnd(); // Sincronizar al final de la animación actual
             playableDirector.playableAsset = timeline;
+            playableDirector.time = 0; // Iniciar desde el principio
             playableDirector.Play();
         }
         else
@@ -74,15 +92,16 @@ public class TimelineManager : MonoBehaviour
         }
         else
         {
+            SyncToEnd(); // Sincronizar al final de la animación actual
             // Avanzar al siguiente timeline, con bucle si llegamos al final
             currentTimelineIndex = (currentTimelineIndex + 1) % timelines.Count;
         }
-
+        //sceneController.SetPage(currentTimelineIndex);
         // Reproducir el timeline actual basado en el índice
         playableDirector.playableAsset = timelines[currentTimelineIndex];
+        playableDirector.time = 0; // Iniciar desde el principio
         playableDirector.Play();
     }
-
 
     // Método para pausar el Timeline actual
     public void PauseTimeline()

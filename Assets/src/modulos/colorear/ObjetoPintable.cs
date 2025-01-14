@@ -4,6 +4,9 @@ public class ObjetoPintable : MonoBehaviour
 {
     private Renderer rendererObjeto;
 
+    // Evento que se dispara cuando el objeto es pintado
+    public event System.Action OnPintado;
+
     void Start()
     {
         // Obtener el Renderer para cambiar su color
@@ -16,6 +19,7 @@ public class ObjetoPintable : MonoBehaviour
         if (rendererObjeto != null)
         {
             rendererObjeto.material.color = color;
+            OnPintado?.Invoke(); // Disparar evento
         }
     }
 }
